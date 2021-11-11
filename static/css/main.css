@@ -1,5 +1,5 @@
 html { 
-    background: url("/static/images/homebg.jpg") no-repeat center center fixed; 
+    background: #131313 url("/static/images/homebg.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
