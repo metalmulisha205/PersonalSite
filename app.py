@@ -1,11 +1,12 @@
 from flask import Flask, render_template, url_for
 import datetime
+import pytz
 
 app = Flask(__name__)
 @app.route('/')
 def index():
     name = "Cole"
-    currHour = datetime.datetime.now().hour
+    currHour = datetime.datetime.now(pytz.timezone('EST')).hour
     if currHour < 12:
         welcome = "Good Morning, " + name + "!"
     elif currHour < 18: 
