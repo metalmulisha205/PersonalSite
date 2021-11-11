@@ -1,0 +1,22 @@
+html { 
+    background: url("/static/images/homebg.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+html, body{min-height:100%;}
+body{height:94vh;}
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.wrap {
+    height: 100%;
+}
+.brightness img:hover{
+    opacity: 0.9;
+}

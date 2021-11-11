@@ -1,0 +1,53 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="content" style="color:#b4b4b4; height:100%;">
+    <div class="center container" style="height:100%" >
+        <h1>{{ welcome }}</h1>
+        <div class="container" style="display: flex; flex-direction: row; gap: 30px;">
+            <div class="google brightness">
+                <a href="https://www.google.com/">
+                    <img src="static/images/icons/google.png"
+                    width="70" height="70">
+                </a>
+            </div>
+            <div class="google brightness">
+                <a href="https://outlook.office.com/mail/inbox">
+                    <img src="static/images/icons/outlook.png"
+                    width="70" height="70">
+                </a>
+            </div>
+            <div class="google brightness">
+                <a href="https://usarmywestpoint.sharepoint.com/sites/cls.ch151/SitePages/Home.aspx">
+                    <img src="static/images/icons/chemistry.png"
+                    width="70" height="70">
+                </a>
+            </div>
+        </div>
+        <div class="container" style="display: flex; flex-direction: row; gap: 30px; margin-top: 15px;">
+            <div class="google brightness">
+                <a href="https://usarmywestpoint.sharepoint.com/sites/panecore.ph2x5-ay21/SitePages/PH2X5-Course-Sharepoint.aspx?CT=1630197748884&OR=OWA-NT&CID=f76b1249-a851-8be9-a8d2-489994e2c810">
+                    <img src="static/images/icons/physics.png"
+                    width="70" height="70">
+                </a>
+            </div>
+            <div class="google brightness">
+                <a href="https://eecscourses.westpoint.edu/courses/cy355/site/CY355_Book/1.0/Schedule.html">
+                    <img src="static/images/icons/cs.png"
+                    width="70" height="70">
+                </a>
+            </div>
+            <div class="google brightness">
+                <a href="https://eecscourses.westpoint.edu/courses/cs384/">
+                    <img src="static/images/icons/datastructures.png"
+                    width="70" height="70">
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
