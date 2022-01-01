@@ -13,6 +13,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, bcrypt
 
+from commands import create_tables
+
 import forms
 import datetime
 import pytz
@@ -30,6 +32,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", DATABASE_FILE)
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
+
+app.cli.add_command(create_tables)
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
