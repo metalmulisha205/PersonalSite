@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 
 from flask import Flask, flash, render_template, url_for, redirect, request
 import flask_login
-from flask_login.utils import login_required
+from flask_login.utils import _secret_key, login_required
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_manager, login_user, LoginManager, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -28,7 +28,7 @@ app.config['BG_FOLDER'] = BG_FOLDER
 app.config['ICON_FOLDER'] = ICON_FOLDER
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_FILE
-app.config['SECRET_KEY'] = 'redacted'
+app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
@@ -79,6 +79,7 @@ def index():
     # welcome message 
     if current_user.is_authenticated:
         name = current_user.name
+        print(app.secret_key)
     else: 
         name = "Stranger"
     currHour = datetime.datetime.now(pytz.timezone('EST')).hour
@@ -180,4 +181,4 @@ def deleteIcon(iconID):
     flash('Item deleted.')
     return redirect(url_for('profile'))
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
