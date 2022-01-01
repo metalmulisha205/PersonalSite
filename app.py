@@ -13,7 +13,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, bcrypt
 
-from commands import create_tables
+
 
 import forms
 import datetime
@@ -25,6 +25,9 @@ BG_FOLDER = 'static/images/uploads/bgs'
 ICON_FOLDER = 'static/images/uploads/icons'
 
 app = Flask(__name__)
+
+
+
 app.config['PROFILE_FOLDER'] = PROFILE_FOLDER
 app.config['BG_FOLDER'] = BG_FOLDER
 app.config['ICON_FOLDER'] = ICON_FOLDER
@@ -33,7 +36,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", DATABASE_FILE)
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
-app.cli.add_command(create_tables)
+
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
@@ -64,6 +67,11 @@ class Icon(db.Model):
     width = db.Column(db.Integer, nullable=False)
     height = db.Column(db.Integer, nullable=False)
     location = db.Column(db.String(150), nullable=False)
+
+#command to create tables
+@app.cli.command('create_tables')
+def create_tables():
+    app.db.create_all()
 
 #method to save images for profile pictures
 def saveImage(directory, image):
