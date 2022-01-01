@@ -27,7 +27,8 @@ app.config['PROFILE_FOLDER'] = PROFILE_FOLDER
 app.config['BG_FOLDER'] = BG_FOLDER
 app.config['ICON_FOLDER'] = ICON_FOLDER
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_FILE
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", DATABASE_FILE)
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
 bcrypt = Bcrypt(app)
