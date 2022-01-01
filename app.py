@@ -106,6 +106,7 @@ def index():
         size = (w, h)
         print(size)
     else:
+        size = (0,0)
         icons = []
     return render_template('index.html', welcome=welcome, icons=icons, size=size)
 
