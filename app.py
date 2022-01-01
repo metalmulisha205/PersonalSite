@@ -71,7 +71,7 @@ class Icon(db.Model):
 #command to create tables
 @app.cli.command('create_tables')
 def create_tables():
-    app.db.create_all()
+    db.create_all()
 
 #method to save images for profile pictures
 def saveImage(directory, image):
