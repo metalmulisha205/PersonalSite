@@ -1,0 +1,116 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Profile{% endblock %}
+{% block head %}
+    {{super()}}
+    <link type="text/css" rel="stylesheet" href="/static/css/profile.css" />
+{% endblock %}
+{% block content %}
+
+<div class="quarter" style="color:#b4b4b4; height:100%;">
+    <div class="content" style="display: flex; flex-direction: row; margin: 10px;">
+        <div class="content" style="display: flex; flex-direction: column;">
+            <img class="picture" src="static/images/uploads/profile/{{profilePic}}"/>
+            <div class="edit">
+                <form method="POST" enctype="multipart/form-data">
+                    {{profileForm.hidden_tag()}}
+                    <div class="form-group">
+                        {{profileForm.profilePicture}}
+                    </div>
+                    <div>
+                        {{profileForm.profileSubmit(class_="edit")}}
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h1 class="username">metalmulisha205</h1>
+            <h3 class="name">Cole</h3>
+            <div class="icons"> 
+                <H1>Icons</H1>
+                {% for icon in icons %}
+                    <div class="icon">
+                        <H1 class = "order" style="margin-right: 10px; font-size:50px;">{{icon.order}}.</H1>
+                        <img src="static/images/uploads/icons/{{icon.iconPic}}" style="margin-top: auto; margin-bottom: auto; height: {{icon.height}}px; width: {{icon.width}}px;"/>
+                        <H1 class = "order" style="font-size:40px; margin-top: auto; margin-bottom: auto; margin-left: 20px;">{{icon.name}}</H1>
+                        <H1 class = "order" style="font-size:40px; margin-top: auto; margin-bottom: auto; margin-left: 20px;">{{icon.location}}</H1>
+                        <form method="post" action="{{ url_for('deleteIcon', iconID = icon.id) }}">
+                            <input type="image" src="static/images/trashCanDelete.png" alt="Submit" width="40" height="40" style="margin-left: 10px;">
+                        </form>
+                    </div>
+                {% endfor %}
+                <!-- Trigger/Open The Modal -->
+                <button id="myBtn" style="width: 100px;">New Icon</button>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="IconFormMain">
+                            <form method="POST" enctype="multipart/form-data">
+                                {{iconForm.hidden_tag()}}
+                                <div class="IconFormRow">
+                                    <div class="form-group">
+                                        {{iconForm.iconPicture}}
+                                    </div>
+                                    <div class="form-group" style="margin-right: 10px;">
+                                        {{iconForm.name}}
+                                    </div>
+                                    <div class="form-group" style="margin-right: 10px;">
+                                        {{iconForm.website}}
+                                    </div>
+                                    <div class="form-group" style="margin-right: 10px;">
+                                        {{iconForm.height}}
+                                    </div>
+                                    <div class="form-group" style="margin-right: 10px;">
+                                        {{iconForm.width}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{iconForm.loadOrder}}
+                                    </div>
+                                    <div class="IconSubmit">
+                                        {{iconForm.iconSubmit()}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+
+                    // Get the button that opens the modal
+                    var btn = document.getElementById("myBtn");
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks the button, open the modal 
+                    btn.onclick = function() {
+                        modal.style.display = "block";
+                    }
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                </script>
+
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+{% endblock %}

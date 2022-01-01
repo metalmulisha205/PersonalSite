@@ -1,0 +1,46 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<div class="center container" style="color:#b4b4b4; margin-top: 10%; font-size: 150%;">
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label")}}
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label")}}
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+        <div>
+            {{ form.submit(class="btn btn-outline-info")}}
+        </div>
+
+    </form>
+    <small class="text-muted" style="font-size: 60%;">
+        Don't have an account? <a style="color: white;" href="{{ url_for('register') }}"><b>Sign Up</b></a>
+    </small>
+</div>
+
+
+{% endblock %}

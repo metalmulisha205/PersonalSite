@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<div class="content" style="color:#b4b4b4; height:100%;">
+<div class="content" style="color:#b4b4b4; height:90%;">
     <div class="center container" style="height:100%" >
         <h1>{{ welcome }}</h1>
         <form action="https://www.google.com/search?q=" method="GET" class="form" style="width: 280px; margin-bottom: 10px; margin-top: -10px;">
@@ -11,22 +11,37 @@
                 <img src="static/images/search.png">
             </button>
         </form>
-        <div class="container" style="display: flex; flex-direction: row; gap: 30px;">
+        {% for h in range(size[1]) %}
+            <div class="container" style="display: flex; flex-direction: row; gap: 30px; align-items: center;">
+            {% for w in range(size[0]) %}
+                    {% if icons[h*size[1] + w] %}
+                        <a href="{{icons[h*size[1] + w].location}}">
+                            <img 
+                                src="static/images/uploads/icons/{{icons[h*size[1] + w].iconPic}}"
+                                width="{{icons[h*size[1] + w].width}}" height="{{icons[h*size[1] + w].height}}" 
+                                style="align-self: center;"
+                            >
+                        </a>
+                    {% endif %} 
+            {% endfor %}
+            </div>
+        {% endfor %}
+        <!-- <div class="container" style="display: flex; flex-direction: row; gap: 30px;">
             <div class="google brightness">
                 <a href="https://www.google.com/">
-                    <img src="static/images/icons/google.png"
+                    <img src="static/images/uploads/icons/google.png"
                     width="70" height="70">
                 </a>
             </div>
             <div class="google brightness">
                 <a href="https://outlook.office.com/mail/inbox">
-                    <img src="static/images/icons/outlook.png"
+                    <img src="static/images/uploads/icons/outlook.png"
                     width="70" height="70">
                 </a>
             </div>
             <div class="google brightness">
                 <a href="https://usarmywestpoint.sharepoint.com/sites/cls.ch151/SitePages/Home.aspx">
-                    <img src="static/images/icons/chemistry.png"
+                    <img src="static/images/uploads/icons/chemistry.png"
                     width="70" height="70">
                 </a>
             </div>
@@ -34,23 +49,23 @@
         <div class="container" style="display: flex; flex-direction: row; gap: 30px; margin-top: 15px;">
             <div class="google brightness">
                 <a href="https://usarmywestpoint.sharepoint.com/sites/panecore.ph2x5-ay21/SitePages/PH2X5-Course-Sharepoint.aspx?CT=1630197748884&OR=OWA-NT&CID=f76b1249-a851-8be9-a8d2-489994e2c810">
-                    <img src="static/images/icons/physics.png"
+                    <img src="static/images/uploads/icons/physics.png"
                     width="70" height="70">
                 </a>
             </div>
             <div class="google brightness">
                 <a href="https://eecscourses.westpoint.edu/courses/cy355/site/CY355_Book/1.0/Schedule.html">
-                    <img src="static/images/icons/cs.png"
+                    <img src="static/images/uploads/icons/cs.png"
                     width="70" height="70">
                 </a>
             </div>
             <div class="google brightness">
                 <a href="https://eecscourses.westpoint.edu/courses/cs384/">
-                    <img src="static/images/icons/datastructures.png"
+                    <img src="static/images/uploads/icons/datastructures.png"
                     width="70" height="70">
                 </a>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </div>
