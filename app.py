@@ -79,7 +79,6 @@ def index():
     # welcome message 
     if current_user.is_authenticated:
         name = current_user.name
-        print(app.secret_key)
     else: 
         name = "Stranger"
     currHour = datetime.datetime.now(pytz.timezone('EST')).hour
