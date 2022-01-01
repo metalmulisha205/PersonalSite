@@ -41,7 +41,7 @@ class AddIcon(FlaskForm):
     name = StringField(validators=[InputRequired(), Length(
         min=1, max=20)], render_kw={"placeholder": "Name"})
     website = StringField(validators=[InputRequired(), Length(
-        min=1, max=20)], render_kw={"placeholder": "URL"})
+        min=1, max=150)], render_kw={"placeholder": "URL"})
     height = IntegerField(validators=[InputRequired(), NumberRange(
         min=20, max=500)], render_kw={"placeholder": "Height"})
     width = IntegerField(validators=[InputRequired(), NumberRange(

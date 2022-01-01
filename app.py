@@ -58,7 +58,7 @@ class Icon(db.Model):
     order = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     height = db.Column(db.Integer, nullable=False)
-    location = db.Column(db.String(50), nullable=False)
+    location = db.Column(db.String(150), nullable=False)
 
 #method to save images for profile pictures
 def saveImage(directory, image):
