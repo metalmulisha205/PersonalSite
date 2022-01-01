@@ -58,14 +58,14 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(20), nullable=False, unique=False)
     password = db.Column(db.LargeBinary(), nullable=False)
     isAdmin = db.Column(db.Boolean, nullable=False)
-    profile = db.Column(db.String(20), nullable=False, default="defaultProfile.jpg")
-    bgPic = db.Column(db.String(20), nullable=False, default="defaultBG.jpg")
+    profile = db.Column(db.String(100), nullable=False, default="defaultProfile.jpg")
+    bgPic = db.Column(db.String(100), nullable=False, default="defaultBG.jpg")
 
 class Icon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(20), nullable=False)
-    iconPic = db.Column(db.String(20), nullable=False)
+    iconPic = db.Column(db.String(100), nullable=False)
     order = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     height = db.Column(db.Integer, nullable=False)
