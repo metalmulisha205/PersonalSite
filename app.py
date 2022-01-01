@@ -13,7 +13,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, bcrypt
 
-from forms import *
+import forms
 import datetime
 import pytz
 
@@ -118,7 +118,7 @@ def logout():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = forms.LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
@@ -129,7 +129,7 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    form = forms.RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         new_user = User(username=form.username.data, name = form.name.data, password=hashed_password, isAdmin = False)
@@ -141,8 +141,8 @@ def register():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    profileForm = EditProfilePicture()
-    iconForm = AddIcon()
+    profileForm = forms.EditProfilePicture()
+    iconForm = forms.AddIcon()
     if profileForm.validate_on_submit() and profileForm.profileSubmit.data:
         if profileForm.profilePicture.data:
             image = saveImage(app.config['PROFILE_FOLDER'], profileForm.profilePicture.data)

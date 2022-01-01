@@ -7,7 +7,7 @@ from wtforms.fields.numeric import IntegerField
 from wtforms.fields.simple import FileField
 from wtforms.validators import InputRequired, Length, NumberRange, ValidationError
 
-from app import *
+import app
 
 
 class RegisterForm(FlaskForm):
@@ -19,7 +19,7 @@ class RegisterForm(FlaskForm):
         min=4, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField('Register')
     def validate_username(self, username):
-        existing_username = User.query.filter_by(
+        existing_username = app.User.query.filter_by(
             username=username.data).first()
         if existing_username:
             raise ValidationError(
