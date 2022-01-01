@@ -33,7 +33,10 @@ app.config['BG_FOLDER'] = BG_FOLDER
 app.config['ICON_FOLDER'] = ICON_FOLDER
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", DATABASE_FILE)
+uri = os.environ.get("DATABASE_URL", DATABASE_FILE)
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
 
