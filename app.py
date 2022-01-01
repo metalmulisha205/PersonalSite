@@ -56,7 +56,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(20), nullable=False, unique=False)
-    password = db.Column(db.String(150), nullable=False)
+    password = db.Column(db.Binary(150), nullable=False)
     isAdmin = db.Column(db.Boolean, nullable=False)
     profile = db.Column(db.String(20), nullable=False, default="defaultProfile.jpg")
     bgPic = db.Column(db.String(20), nullable=False, default="defaultBG.jpg")
