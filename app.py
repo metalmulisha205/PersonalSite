@@ -62,7 +62,6 @@ class Icon(db.Model):
 
 #method to save images for profile pictures
 def saveImage(directory, image):
-    print(image)
     imageName = f'{uuid4().__str__()}-{secure_filename(image.filename)}'
     path = os.path.join(app.root_path, directory, imageName)
     i = Image.open(image)
@@ -104,7 +103,6 @@ def index():
         # calculate the amount of rows required with a width w
         h = -(n//-w) #ceiling division 
         size = (w, h)
-        print(size)
     else:
         size = (0,0)
         icons = []
@@ -149,7 +147,6 @@ def profile():
             current_user.profile = image
             db.session.commit()
     if iconForm.validate_on_submit() and iconForm.iconSubmit.data:
-        print("form submitted")
         if iconForm.iconPicture.data:
             image = saveImage(app.config['ICON_FOLDER'], iconForm.iconPicture.data)
             location = iconForm.website.data
@@ -165,7 +162,6 @@ def profile():
                 height=iconForm.height.data, 
                 location=location
             )
-            print(newIcon)
             db.session.add(newIcon)
             db.session.commit()
     icons = Icon.query.filter_by(uID=current_user.id).order_by(Icon.order).all()
