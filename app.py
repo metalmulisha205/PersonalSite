@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from flask import Flask, flash, render_template, url_for, redirect, request
+from flask import Flask, flash, render_template, url_for, redirect, request, session
 import flask_login
 from flask_login.utils import _secret_key, login_required
 from flask_sqlalchemy import SQLAlchemy
@@ -83,6 +83,9 @@ def initdb():
     db.create_all()
     print("initialized db")
 
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 #method to save images for profile pictures
 def saveImage(directory, image):
