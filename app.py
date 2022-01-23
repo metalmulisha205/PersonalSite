@@ -78,9 +78,10 @@ class Icon(db.Model):
     location = db.Column(db.String(150), nullable=False)
 
 #command to create tables
-@app.cli.command('create_tables')
-def create_tables():
+@app.cli.command('initdb')
+def initdb():
     db.create_all()
+    print("initialized db")
 
 #method to save images for profile pictures
 def saveImage(directory, image):
