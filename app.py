@@ -83,6 +83,7 @@ def initdb():
     db.create_all()
     print("initialized db")
 
+
 #method to save images for profile pictures
 def saveImage(directory, image):
     imageName = f'{uuid4().__str__()}-{secure_filename(image.filename)}'

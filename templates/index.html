@@ -17,7 +17,7 @@
                     {% if icons[h*size[1] + w] %}
                         <a href="{{icons[h*size[1] + w].location}}">
                             <img 
-                                src="data:image/jpeg;base64,{{ icons[h*size[1] + w].iconPic }}"
+                                src="data:image/jpeg;base64,{{ icons[h*size[1] + w].iconPic.decode('utf-8') }}"
                                 width="{{icons[h*size[1] + w].width}}" height="{{icons[h*size[1] + w].height}}" 
                                 style="align-self: center;"
                             >
