@@ -13,6 +13,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt, bcrypt
 
+from base64 import b64encode
+import base64
 
 
 import forms
@@ -52,20 +54,24 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+def render_picture(data):
+    render_pic = base64.b64encode(data)#.decode('ascii') 
+    return render_pic
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(20), nullable=False, unique=False)
     password = db.Column(db.LargeBinary(), nullable=False)
     isAdmin = db.Column(db.Boolean, nullable=False)
-    profile = db.Column(db.String(100), nullable=False, default="defaultProfile.jpg")
+    profile = db.Column(db.LargeBinary, nullable=False, default=render_picture(open(PROFILE_FOLDER+"/defaultProfile.jpg", "rb").read()))
     bgPic = db.Column(db.String(100), nullable=False, default="defaultBG.jpg")
 
 class Icon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(20), nullable=False)
-    iconPic = db.Column(db.String(100), nullable=False)
+    iconPic = db.Column(db.LargeBinary, nullable=False)
     order = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
     height = db.Column(db.Integer, nullable=False)
@@ -159,12 +165,13 @@ def profile():
     iconForm = forms.AddIcon()
     if profileForm.validate_on_submit() and profileForm.profileSubmit.data:
         if profileForm.profilePicture.data:
-            image = saveImage(app.config['PROFILE_FOLDER'], profileForm.profilePicture.data)
+            #image = saveImage(app.config['PROFILE_FOLDER'], profileForm.profilePicture.data)
+            image = render_picture(profileForm.profilePicture.data.read())
             current_user.profile = image
             db.session.commit()
     if iconForm.validate_on_submit() and iconForm.iconSubmit.data:
         if iconForm.iconPicture.data:
-            image = saveImage(app.config['ICON_FOLDER'], iconForm.iconPicture.data)
+            image = render_picture(iconForm.iconPicture.data.read())
             location = iconForm.website.data
             if "htt" not in location:
                 location = "https://" + location
@@ -181,7 +188,7 @@ def profile():
             db.session.add(newIcon)
             db.session.commit()
     icons = Icon.query.filter_by(uID=current_user.id).order_by(Icon.order).all()
-    return render_template("profile.html", icons=icons, profileForm=profileForm, iconForm=iconForm, profilePic = flask_login.current_user.profile)
+    return render_template("profile.html", icons=icons, profileForm=profileForm, iconForm=iconForm, profilePic = flask_login.current_user.profile.decode("utf-8"))
 
 @app.route('/profile/delete/<int:iconID>', methods=['POST'])
 @login_required

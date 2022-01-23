@@ -9,7 +9,7 @@
 <div class="quarter" style="color:#b4b4b4; height:100%;">
     <div class="content" style="display: flex; flex-direction: row; margin: 10px;">
         <div class="content" style="display: flex; flex-direction: column;">
-            <img class="picture" src="static/images/uploads/profile/{{profilePic}}"/>
+            <img class="picture" src="data:image/jpeg;base64,{{ profilePic }}"/>
             <div class="edit">
                 <form method="POST" enctype="multipart/form-data">
                     {{profileForm.hidden_tag()}}
@@ -31,7 +31,7 @@
                 {% for icon in icons %}
                     <div class="icon">
                         <H1 class = "order" style="margin-right: 10px; font-size:50px;">{{icon.order}}.</H1>
-                        <img src="static/images/uploads/icons/{{icon.iconPic}}" style="margin-top: auto; margin-bottom: auto; height: {{icon.height}}px; width: {{icon.width}}px;"/>
+                        <img src="data:image/jpeg;base64,{{ icon.iconPic.decode('utf-8') }}" style="margin-top: auto; margin-bottom: auto; height: {{icon.height}}px; width: {{icon.width}}px;"/>
                         <H1 class = "order" style="font-size:40px; margin-top: auto; margin-bottom: auto; margin-left: 20px;">{{icon.name}}</H1>
                         <H1 class = "order" style="font-size:40px; margin-top: auto; margin-bottom: auto; margin-left: 20px;">{{icon.location}}</H1>
                         <form method="post" action="{{ url_for('deleteIcon', iconID = icon.id) }}">
