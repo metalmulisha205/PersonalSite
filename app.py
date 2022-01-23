@@ -140,7 +140,7 @@ def logout():
 def login():
     form = forms.LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data.encode('utf-8')).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
