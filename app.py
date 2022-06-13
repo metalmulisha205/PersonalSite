@@ -134,7 +134,6 @@ def index():
     else:
         size = (0,0)
         icons = []
-    print(size)
     return render_template('index.html', welcome=welcome, icons=icons, size=size)
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -206,4 +205,4 @@ def deleteIcon(iconID):
     flash('Item deleted.')
     return redirect(url_for('profile'))
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
