@@ -14,7 +14,7 @@
         {% for h in range(size[1]) %}
             <div class="container" style="display: flex; flex-direction: row; gap: 30px; align-items: center;">
             {% for w in range(size[0]) %}
-                    {% if icons[h*size[0] + w] %}
+                    {% if icons[h*size[1] + w] %}
                         <a href="{{icons[h*size[1] + w].location}}">
                             <img 
                                 src="data:image/jpeg;base64,{{ icons[h*size[1] + w].iconPic.decode('utf-8') }}"
