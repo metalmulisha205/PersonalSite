@@ -128,8 +128,7 @@ def index():
         
         # calculate the amount of rows required with a width w
         h = -(-n//w) #ceiling division 
-        print(w)
-        print(n)
+
         size = (w, h)
     else:
         size = (0,0)

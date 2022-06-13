@@ -15,10 +15,10 @@
             <div class="container" style="display: flex; flex-direction: row; gap: 30px; align-items: center;">
             {% for w in range(size[0]) %}
                     {% if icons[h*size[0] + w] %}
-                        <a href="{{icons[h*size[1] + w].location}}">
+                        <a href="{{icons[h*size[0] + w].location}}">
                             <img 
-                                src="data:image/jpeg;base64,{{ icons[h*size[1] + w].iconPic.decode('utf-8') }}"
-                                width="{{icons[h*size[1] + w].width}}" height="{{icons[h*size[1] + w].height}}" 
+                                src="data:image/jpeg;base64,{{ icons[h*size[0] + w].iconPic.decode('utf-8') }}"
+                                width="{{icons[h*size[0] + w].width}}" height="{{icons[h*size[0] + w].height}}" 
                                 style="align-self: center;"
                             >
                         </a>
