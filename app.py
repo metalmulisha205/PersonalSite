@@ -132,6 +132,7 @@ def index():
     else:
         size = (0,0)
         icons = []
+    print(size)
     return render_template('index.html', welcome=welcome, icons=icons, size=size)
 
 @app.route('/logout', methods=['GET', 'POST'])
