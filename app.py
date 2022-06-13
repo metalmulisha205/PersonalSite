@@ -99,7 +99,6 @@ def saveImage(directory, image):
 
 
 
-
 @app.route('/')
 def index():
     # welcome message 
