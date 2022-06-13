@@ -127,7 +127,9 @@ def index():
             w = 3
         
         # calculate the amount of rows required with a width w
-        h = -(n//-w) #ceiling division 
+        h = -(-n//w) #ceiling division 
+        print(w)
+        print(n)
         size = (w, h)
     else:
         size = (0,0)
@@ -204,4 +206,4 @@ def deleteIcon(iconID):
     flash('Item deleted.')
     return redirect(url_for('profile'))
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
