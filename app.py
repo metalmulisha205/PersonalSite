@@ -78,7 +78,7 @@ class Icon(db.Model):
     location = db.Column(db.String(150), nullable=False)
 
 #command to create tables
-@app.cli.command('initdb')
+@app.before_first_request
 def initdb():
     db.create_all()
     print("initialized db")
