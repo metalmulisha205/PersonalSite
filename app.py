@@ -41,7 +41,7 @@ if uri.startswith("postgres://"):
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
-print("hello world")
+
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
@@ -78,7 +78,7 @@ class Icon(db.Model):
     location = db.Column(db.String(150), nullable=False)
 
 #command to create tables
-@app.before_first_request
+@app.cli.command('initdb')
 def initdb():
     db.create_all()
     print("initialized db")
