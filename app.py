@@ -41,7 +41,7 @@ if uri.startswith("postgres://"):
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 
-
+print("hello world")
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
