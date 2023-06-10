@@ -81,7 +81,7 @@ class Icon(db.Model):
 @app.cli.command('initdb')
 def initdb():
     db.create_all()
-    print("initialized db")
+    print("initialized db"
 
 @app.before_request
 def make_session_permanent():
@@ -101,6 +101,8 @@ def saveImage(directory, image):
 
 @app.route('/')
 def index():
+    print("trying")
+    initdb()
     # welcome message 
     if current_user.is_authenticated:
         name = current_user.name
