@@ -46,10 +46,16 @@ app.config['SECRET_KEY'] = os.environ.get('secret_key', 'dev')
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 
+@app.before_first_request
+def create_database():
+    db.create_all()
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
  
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -81,7 +87,7 @@ class Icon(db.Model):
 @app.cli.command('initdb')
 def initdb():
     db.create_all()
-    print("initialized db"
+    print("initialized db")
 
 @app.before_request
 def make_session_permanent():
@@ -101,8 +107,6 @@ def saveImage(directory, image):
 
 @app.route('/')
 def index():
-    print("trying")
-    initdb()
     # welcome message 
     if current_user.is_authenticated:
         name = current_user.name
